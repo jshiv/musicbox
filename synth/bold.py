@@ -38,11 +38,13 @@ osc = Osc(wave, freq=pitch, mul=amp)
 # osc.out()
 
 verb = Freeverb(osc)#.out()
-effect = Chorus(verb, bal=ctl)
+
+ctl = Midictl(1, minscale=0, maxscale=5)
+chorus = Chorus(verb, depth=ctl, bal=.5)
 # lfo = Sine(freq=.5, phase=.5, mul=.5, add=.3)
 # delay = Delay(effect, delay=.5, feedback=lfo, maxdelay=5).out()
 # delay = Delay(effect, delay=.5, feedback=.7, maxdelay=2).out()
-delay = Delay(effect, delay=0, feedback=.5, maxdelay=1)
+delay = Delay(chorus, delay=0, feedback=.5, maxdelay=1)
 delay.out()
 
 # distro = Disto(effect, drive=.5).out()

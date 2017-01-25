@@ -4,6 +4,7 @@ pm_get_input_devices()
 # Set Up Server
 s = Server()
 s.setMidiInputDevice(0) # Must be called before s.boot()
+#s.setAmp(-3)
 s.boot()
 s.start()
 
@@ -17,7 +18,7 @@ pitch = MToF(midi['pitch'] * bend)
 
 
 
-amp = MidiAdsr(midi['velocity'], attack=.01, decay=0.05, sustain=0.7, release=0.1)
+amp = MidiAdsr(midi['velocity'], attack=.8, decay=0.05, sustain=0.7, release=0.1)
 
 # wave = PartialTable()
 #wave = AtanTable()

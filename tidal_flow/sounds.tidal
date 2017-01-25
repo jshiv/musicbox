@@ -1,0 +1,28 @@
+/*cps (60/60)*/
+
+
+d1 $ sound "bd*8" |+| pan sine1
+
+
+d1 $ sound "bd:3(3,5)"
+d1 $ chop 10 $ sound "[bd:3(3,5), hh:6(4,5), sn:2(2,5)]" |+| pan sine1
+d1 $ sound "[bd:3(3,5), hh:6(4,5), sn:2(2,5)]" |+| pan sine1
+
+
+d1 $ silence
+
+
+d2 $ stut 3 0.2 (-0.2) $ striateL' 10 0.125 1 $
+  superimpose (slow 4) $ stack [
+  sound "606 ade",
+  sound "{miniyeah sax:9}",
+  sound "ade:9 808hc:5"
+  ]
+  # pan (density 4 $ choose [0,0.1 .. 1])
+  # cutoff (density 7 $ scale 100 10000 $ rand)
+  # vowel "a o"
+  # gain "0.5"
+
+d2 $ silence
+
+hush

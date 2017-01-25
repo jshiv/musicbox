@@ -1,0 +1,24 @@
+Song:
+  Tempo: 80
+  Flow:
+    - Verse:  x4
+    - Chorus: x4
+  Kit:
+    - bass:     hammerhead_drum_sounds/house_2_1.wav
+    - snare:    hammerhead_drum_sounds/roland_tr_909_2.wav
+    - hihat:    hammerhead_drum_sounds/house_2_5.wav
+    - cymbals_1:  hammerhead_drum_sounds/cymbals_1.wav
+    - cymbals_3: hammerhead_drum_sounds/cymbals_3.wav
+    - deep:     hammerhead_drum_sounds/house_2_2.wav  
+
+Verse:
+  - bass:     .X.....X.X...X..
+  - snare:    ..X.....X...X...
+  - hihat:    X.X.X.X.X.X.X.X.
+
+Chorus:
+  - bass:    	 X..X...X..X.....
+  - snare:    	....X.......X...
+  - hihat:    	XXXXXXXXXXXXX...
+  - cymbals_1:  ....XX.X..X.X...
+  - deep:     	.............X..

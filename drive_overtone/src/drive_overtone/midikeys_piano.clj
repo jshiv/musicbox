@@ -1,4 +1,3 @@
-(ns noise.core)
 (use 'overtone.live)
 (use 'overtone.inst.piano)
 (use 'overtone.inst.synth)

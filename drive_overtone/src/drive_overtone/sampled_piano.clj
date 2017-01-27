@@ -1,7 +1,4 @@
-(use 'overtone.live)
-(use 'overtone.inst.piano)
-(use 'overtone.inst.synth)
-(use 'overtone.inst.sampled-piano)
+(event-debug-off)
 
 
 
@@ -11,6 +8,8 @@
                      vel  (:velocity-f e)]
                         (sampled-piano note vel)))
                   ::keyboard-handler)
+
+
 
 
 (demo 7 (lpf (mix (saw [50 (line 100 1600 5) 101 100.5]))

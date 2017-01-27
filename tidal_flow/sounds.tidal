@@ -1,16 +1,24 @@
-/*cps (60/60)*/
+cps (100/120)
 
 
 d1 $ sound "bd*8" |+| pan sine1
 
+d3 $ n "[c2 c3 c4 c5]" # s "supersquare" # gain "0.6"
+d3 $ silence
+d1 $ slowcat [
+sound "[hardcore:4(3,8), hardcore:5(7,8)]" |+| accelerate "-1",
+sound "[hardcore:4(3,8), hardcore:5(7,8)]" |+| pan sine1
+]
+d1 $ silence
 
 d1 $ sound "bd:3(3,5)"
 d1 $ chop 10 $ sound "[bd:3(3,5), hh:6(4,5), sn:2(2,5)]" |+| pan sine1
 d1 $ sound "[bd:3(3,5), hh:6(4,5), sn:2(2,5)]" |+| pan sine1
-
-
 d1 $ silence
 
+d1 $ silence
+d1 $ sound "{miniyeah sax:9}"
+d2 $ sound "[sax:9, sax:11, sax:10]" # gain "0.5" # vowel "o"
 
 d2 $ stut 3 0.2 (-0.2) $ striateL' 10 0.125 1 $
   superimpose (slow 4) $ stack [

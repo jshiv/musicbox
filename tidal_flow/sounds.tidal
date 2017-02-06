@@ -1,17 +1,22 @@
 cps (100/120)
 
 
-d1 $ sound "bd*8" |+| pan sine1
+d1 $
+d1 $ every 3 (rev) $ density 2 $ every 2 (|+| note "12") $ (|+| note "-8") $ note "0 4 7 11 12 16 19 23"
+
+
+d1 $ sound "bd*8" |+| pan sine1 |+| gain "0.6"
+d1 $ silence
 
 d3 $ n "[c2 c3 c4 c5]" # s "supersquare" # gain "0.6"
 d3 $ silence
-d1 $ slowcat [
+d2 $ slowcat [
 sound "[hardcore:4(3,8), hardcore:5(7,8)]" |+| accelerate "-1",
 sound "[hardcore:4(3,8), hardcore:5(7,8)]" |+| pan sine1
-]
-d1 $ silence
+] |+| gain "0.95"
+d2 $ silence
 
-d1 $ sound "bd:3(3,5)"
+d1 $ sound "bd:3(3,5)" |+| gain "0.95"
 d1 $ chop 10 $ sound "[bd:3(3,5), hh:6(4,5), sn:2(2,5)]" |+| pan sine1
 d1 $ sound "[bd:3(3,5), hh:6(4,5), sn:2(2,5)]" |+| pan sine1
 d1 $ silence
@@ -19,7 +24,7 @@ d1 $ silence
 d1 $ silence
 d1 $ sound "{miniyeah sax:9}"
 d2 $ sound "[sax:9, sax:11, sax:10]" # gain "0.5" # vowel "o"
-
+d2 $ silence
 d2 $ stut 3 0.2 (-0.2) $ striateL' 10 0.125 1 $
   superimpose (slow 4) $ stack [
   sound "606 ade",
@@ -29,7 +34,7 @@ d2 $ stut 3 0.2 (-0.2) $ striateL' 10 0.125 1 $
   # pan (density 4 $ choose [0,0.1 .. 1])
   # cutoff (density 7 $ scale 100 10000 $ rand)
   # vowel "a o"
-  # gain "0.5"
+  # gain "0.7"
 
 d2 $ silence
 

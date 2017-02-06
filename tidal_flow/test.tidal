@@ -7,12 +7,15 @@ devices <- midiDevices
 
 bps(200/120)
 hush
+d1 $ sound (samples "drum arpy newnotes" "0 1 2")
+
 d1 $ n "[c2 e3 g4 c5 c4 c3]/3" # s "superpwm"
 
 d1 $ n "[c2 e3 g4 c5 c4 c3]/3" # s "supersaw"
 d1 $ n "[c2 e3 g4 c5 c4 c3]/3" # s "supersquare"
 
 d1 $ n "[c2 e3 g4 c5 c4 c3]/3" # s "supercomparator"
+d $ n "[c2 e3 g4 c5 c4 c3]/3" # s "supernoise"
 
 d1 $ every 16 (density 24 . (|+| midinote "24") . (# sustain "0.3") . (# attack "0.05"))
   $ s "supercomparator/4" # midinote (fmap (+24) $ irand 24)

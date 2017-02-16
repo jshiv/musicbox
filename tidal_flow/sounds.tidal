@@ -8,18 +8,28 @@ d1 $ every 3 (rev) $ density 2 $ every 2 (|+| note "12") $ (|+| note "-8") $ not
 d1 $ sound "bd*8" |+| pan sine1 |+| gain "0.6"
 d1 $ silence
 
+d1 $ every 4 6 $ sound "ch ~ ~"
+
 d3 $ n "[c2 c3 c4 c5]" # s "supersquare" # gain "0.6"
 d3 $ silence
-d2 $ slowcat [
+d3 $ slowcat [
 sound "[hardcore:4(3,8), hardcore:5(7,8)]" |+| accelerate "-1",
 sound "[hardcore:4(3,8), hardcore:5(7,8)]" |+| pan sine1
-] |+| gain "0.95"
+] |+| gain "1"
 d2 $ silence
 
 d1 $ sound "bd:3(3,5)" |+| gain "0.95"
 d1 $ chop 10 $ sound "[bd:3(3,5), hh:6(4,5), sn:2(2,5)]" |+| pan sine1
 d1 $ sound "[bd:3(3,5), hh:6(4,5), sn:2(2,5)]" |+| pan sine1
 d1 $ silence
+
+d1 $ sound "baby"
+d1 $ slow 40 $ striate 1000 $ sound "[baby ~ ~ ~ ~ ~ ~ ~ ~ ~ ~]*8" |+| gain "0.8"
+d2
+d2 $ slow 40 $ striate' 100000 (1/1000) $ sound "xmas"
+hush
+d2 $ slow 40 $ striate 1000 $ sound "xmas*18"
+
 
 d1 $ silence
 d1 $ sound "{miniyeah sax:9}"

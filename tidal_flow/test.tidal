@@ -3,19 +3,111 @@ import Sound.Tidal.MIDI.VolcaKeys
 
 displayOutputDevices >>= putStrLn
 
+d1 $ slow 64 $ striate' 6400 (1/100) $ sound "bev"
+d1 $ slow 32 $ striate' 32 (1/16) $ sound "bev"
+
+d1 $ chop 7 $ n "[2 5 11 9 5 9 ~ 13 11 ]*1" # s "sax" # gain "0.9"  # cut "9" # coarse "8"
+d1 $ silence
+d1 $ silence
+d2 $ every 8 rev $ stack [
+sound "[bd*2] bd [bd*2] ~" ,
+sound "[hh*2 hh cp hh]"
+]
+|+| gain "0.8 "
+hush
+
+do
+  let pat = ("{1 0 1*2 ~ 0 1*2 0 0 2}%8")
+  let x = gain pat
+  let y = gain (inverse <$> pat)
+  c1 $
+      stack [
+      x # b,
+      y # k |=| speed "[1]",
+      gtfo $ (0.125 <~) $ y # t,
+      x # cp,
+      y # bd,
+      ]
+d1 $ n "[{2} 7 2*2 8 7 {2 1} ~ 7]/2"# s "sid"
+d1 $ silence
+
+d1 $ sound (samples "sid*8" (irand 3))
+d1 $ (jux (spread' (<~) (toRational <$> (slow 16 sinewave1))) $ sound "bd*2 pluck/2 sn/2 [pluck/0 pluck/1]") |+| speed "1 2 3 2"
+d1 $ jux (spread' (density) ((*4) . (1-) <$> (slow 8 $ rattri1))) $ sound "bd drum*2 drum/2 [bass3/2,bd]" |+| speed (slow 8 $ (+1) <$> tri1)
+
+d1 $ n "0 4 5" # s "sax"
+
+
 devices <- midiDevices
 
-bps(200/120)
+bps(140/120)
 hush
-d1 $ sound (samples "drum arpy newnotes" "0 1 2")
 
-d1 $ n "[c2 e3 g4 c5 c4 c3]/3" # s "superpwm"
+d1 $ sound "bass3 ~ bass3 ~ bass3 ~  bass3 bass3" |+| crush "8" |+| gain "0.8"
+d1 $silence
 
-d1 $ n "[c2 e3 g4 c5 c4 c3]/3" # s "supersaw"
-d1 $ n "[c2 e3 g4 c5 c4 c3]/3" # s "supersquare"
+d2 $ slowcat [
+sound "[hardcore:4(3,8), hardcore:5(7,8)]" |+| accelerate "-1",
+sound "[hardcore:4(3,8), hardcore:5(7,8)]" |+| pan sine1
+] |+| gain "0.95"
+d2 $ silence
+
+
+d1 $ sound "[jungbass:2*2 ~ ]*1"
+|+| delay "0.5"
+|+| delaytime "0.5"
+|+| delayfeedback "0.5"
+d1 $ silence
+
+d2 $ whenmod 10 7 (|+| note "-16") $ whenmod 6 3 (|+| note "-10")
+$ every 3 (rev) $ density 2
+$ every 2 (|+| note "-8")
+$ n "[0 4 7 11 12 16 19 23]/2" # s "supersaw"
+# sustain "0.3"
+# voice "0.3"
+# delay "0.2"
+# delaytime "0.5"
+# delayfeedback "0.3"
+# detune "8"
+d2 $ silence
+# resonance "0.4" # lfo "1"  # speed "0.25 1"
+
+d1
+
+d1 $ sound "[bend:1*8 ~ ~ bend:4*10 ~ ~ ]"
+|+| gain "0.7"
+|+| vowel "i"
+|+| delay "0.8"
+|+| delaytime "0.4"
+|+| delayfeedback "0.5"
+
+
+d1 $ whenmod 8 6 (|+| speed "0.9") $ every 4 (0.25 <~) $ every 3 (0.25 <~) $
+stack [
+slow 16 $ (trunc 0.25 $ striate 16 $ sound "k*24 s:4*16 hh*12 perc*16")
+|+| delay "0.4" |+| gain "0.7",
+whenmod 7 6 (striate 2) $ slow 2 $ sound (samples "[~ kh] [~ kh? ~ kh] [cp:3 s] [ kh]" (run 18)),
+whenmod 6 5 (striate 2) $ slow 4 $ sound (samples "hh*6 hh*4 hh*3 hh*2 hh*2 hh*3 hh*4 hh*6" "3")
+|+| cutoff (scale 0.07 0.3 $ slow 5 sine1) |+| speed (scale 0.5 1 $ slow 4.1 sine1) |+| resonance "0.4" |+| delay "0.2" ]
+|+| delaytime "0.4"
+|+| delayfeedback "0.5"
+
+d1 $ silence
+d1 $ sound  "~ bd*2 ~ ~ " |+| gain "0.7"
+d1 $ sound "hc"
+d1 $ sound "[bev, [ho:3](3,8)]" # cut "-1"
+d1 $ sound (samples "newnotes*6" "1 2 5")
+
+d1 $ n "[c2 e3 g4 c5 c4 c3]" # s "superpwm"
+
+d1 $ n "[c2 e3 g4 c5 c4 c3]*8" # s "supersaw"
+
+d1 $ note "c2"
+hush
+d1 1 $ n "[c2 e3 g4 c5 c4 c3]*8" # s "supersquare"
 
 d1 $ n "[c2 e3 g4 c5 c4 c3]/3" # s "supercomparator"
-d $ n "[c2 e3 g4 c5 c4 c3]/3" # s "supernoise"
+d1 $ n "[c2 e3 g4 c5 c4 c3]/3" # s "supernoise"
 
 d1 $ every 16 (density 24 . (|+| midinote "24") . (# sustain "0.3") . (# attack "0.05"))
   $ s "supercomparator/4" # midinote (fmap (+24) $ irand 24)
